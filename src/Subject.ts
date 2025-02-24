@@ -11,8 +11,8 @@ export class Subject<T> extends Observable<T> implements SubscriptionLike {
     private observerMap: Map<number, Observer<T>>;
     private observableCount: number;
 
-    private errorRef: any;
-    private isComplete: boolean;
+    protected errorRef: any;
+    protected isComplete: boolean;
 
     constructor () {
         super();
