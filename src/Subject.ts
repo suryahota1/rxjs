@@ -46,6 +46,7 @@ export class Subject<T> extends Observable<T> implements SubscriptionLike {
 
     complete () {
         this.closed = true;
+        this.isComplete = true;
         if ( this.observerMap.size > 0 ) {
             const values = Array.from(this.observerMap.values());
             for ( let i = 0; i < values.length; i++ ) {
