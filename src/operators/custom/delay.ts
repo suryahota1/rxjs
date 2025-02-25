@@ -1,6 +1,6 @@
 // A custom operator which emits values after a given value of delay.
 
-import { Observable, Subscriber } from "../Observable";
+import { Observable, Subscriber } from "../../Observable";
 
 function delay ( millis: number ): Function {
     return function<T> ( sourceObservable: Observable<T> ): Observable<T> {

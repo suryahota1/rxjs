@@ -27,7 +27,7 @@ interface SubscriptionLike {
 
 export type TearDownLogic = SubscriptionLike | (() => void) | void;
 
-class Subscription implements SubscriptionLike {
+export class Subscription implements SubscriptionLike {
     
     closed: boolean;
 
@@ -99,7 +99,7 @@ export class Subscriber<T> extends Subscription implements Observer<T> {
         this.destination = destination instanceof Subscriber ? destination : createSafeObserver(destination);
     }
     
-    next( v: any ) {
+    next( v: T ) {
         if ( this.isStopped ) {
             // handle this
         } else {
@@ -209,7 +209,7 @@ export class Observable<T> implements Subscribable<T> {
     }
 
     subscribe( subscriberRef: Subscriber<T> | Partial<Observer<T>> | (() => void) | null ): Subscription {
-        const subscriber = subscriberRef instanceof Subscriber ? subscriberRef : new Subscriber(subscriberRef);
+        const subscriber = subscriberRef instanceof Subscriber ? subscriberRef : new Subscriber<T>(subscriberRef);
         subscriber.add(this._trySubscribe(subscriber));
         return subscriber;
     }
